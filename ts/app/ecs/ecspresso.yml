@@ -1,0 +1,7 @@
+# このファイルでは SSM プラグインが利用できないため環境変数から設定する
+region: "{{ must_env `AWS_DEFAULT_REGION` }}"
+cluster: "{{ must_env `ECS_CLUSTER_NAME` }}"
+service: app
+service_definition: ecs-service-def.json
+task_definition: ecs-task-def.jsonnet
+timeout: "10m0s"

@@ -1,0 +1,40 @@
+{
+  "deploymentConfiguration": {
+    "deploymentCircuitBreaker": {
+      "enable": true,
+      "rollback": true
+    },
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 100
+  },
+  "deploymentController": {
+    "type": "ECS"
+  },
+  "enableECSManagedTags": true,
+  "enableExecuteCommand": true,
+  "healthCheckGracePeriodSeconds": 5,
+  "launchType": "FARGATE",
+  "loadBalancers": [
+    {
+      "containerName": "app",
+      "containerPort": 3400,
+      "targetGroupArn": "{{ ssm `/ecspresso/service/app/targer-group-arn` }}"
+    }
+  ],
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "securityGroups": [
+        "{{ ssm `/ecspresso/service/app/security-group-id` }}"
+      ],
+      "subnets": [
+        "{{ ssm `/ecspresso/application/private-subnet-ids` 0 }}",
+        "{{ ssm `/ecspresso/application/private-subnet-ids` 1 }}"
+      ]
+    }
+  },
+  "platformFamily": "Linux",
+  "platformVersion": "LATEST",
+  "propagateTags": "NONE",
+  "schedulingStrategy": "REPLICA",
+  "tags": []
+}
