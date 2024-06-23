@@ -1,0 +1,10 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "app"
+  ],
+  "packageManager": "yarn@4.3.0"
+}
